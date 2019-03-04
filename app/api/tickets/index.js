@@ -2,6 +2,9 @@ const { Router } = require('express');
 const { Ticket } = require('../../models');
 
 const router = new Router();
+router.get('/:ticketId', (req, res) => res.status(200).json(Ticket.getById(req.params.ticketId)));
+router.delete('/:ticketId', (req, res) => res.status(200).json(Ticket.delete(req.params.ticketId)));
+router.put('/:ticketId', (req, res) => res.status(200).json(Ticket.update(req.params.ticketId, req.body)));
 router.get('/', (req, res) => res.status(200).json(Ticket.get()));
 router.post('/', (req, res) => {
   try {
