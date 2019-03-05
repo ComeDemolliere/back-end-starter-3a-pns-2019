@@ -8,8 +8,8 @@ router.put('/:studentId', (req, res) => res.status(200).json(Student.update(req.
 router.get('/', (req, res) => res.status(200).json(Student.get()));
 router.post('/', (req, res) => {
   try {
-    const ticket = Student.create(req.body);
-    res.status(201).json(ticket);
+    const student = Student.create(req.body);
+    res.status(201).json(student);
   } catch (err) {
     if (err.name === 'ValidationError') {
       res.status(400).json(err.extra);
