@@ -6,7 +6,7 @@ const router = new Router();
 
 const attachStudent = function (ticket) {
   const student = Student.getById(ticket.studentId);
-  const currentTicket = ticket;
+  const currentTicket = Object.assign({}, ticket);
   currentTicket.student = student;
   return currentTicket;
 };
@@ -18,7 +18,7 @@ router.get('/', (req, res) => res.status(200).json(Ticket.get().map(ticket => at
 router.post('/', (req, res) => {
   try {
     const ticket = Ticket.create(req.body);
-    res.status(201).json(attachStudent(ticket));
+    res.status(201).json(attachStudent(ticket).copy);
   } catch (err) {
     if (err.name === 'ValidationError') {
       res.status(400).json(err.extra);
